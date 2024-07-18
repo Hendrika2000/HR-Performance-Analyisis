@@ -9,7 +9,8 @@
 ### Project Overview
 
 This data analysis data project aims to explore historical HR data to identify key factors influencing employee retention and productivity, develop actionable insights to enhance employee satisfaction and optimize recruitment strategies, and create visualizations to effectively communicate findings and support data-driven HR decision-making.
-
+![Screenshot (152)](https://github.com/user-attachments/assets/15ba2d6f-c13c-42a9-ac80-2dbadf1940b1)
+![Screenshot (155)](https://github.com/user-attachments/assets/86556aea-d1ea-476f-b553-5667c85df8e4)
 
 ### Data Sources
 
