@@ -8,12 +8,12 @@
 
 ### Project Overview
 
-This data analysis data project aims to xplore historical HR data to identify key factors influencing employee retention and productivity, develop actionable insights to enhance employee satisfaction and optimize recruitment strategies, and create visualizations to effectively communicate findings and support data-driven HR decision-making
+This data analysis data project aims to explore historical HR data to identify key factors influencing employee retention and productivity, develop actionable insights to enhance employee satisfaction and optimize recruitment strategies, and create visualizations to effectively communicate findings and support data-driven HR decision-making
 
 
 ### Data Sources
 
-Sales Data: The primary dataset used for this analysis is the "HRResources.csv" file, containing information about each sale made by the company.
+Sales Data: The primary dataset used for this analysis is the "HumanResources.csv" file, containing information about each sale made by the company.
 
 ### Tools
 
