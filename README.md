@@ -35,60 +35,65 @@ Some common KPIs include:
 
 Include some interesting code/features worked with
 Total active and terminated employees
+```sql
 SELECT
-COUNT(Hiredate) TotalHired,
-SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalActive_Employee,
-COUNT(Hiredate) - SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalTerminated
+	COUNT(Hiredate) TotalHired,
+	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalActive_Employee,
+	COUNT(Hiredate) - SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalTerminated
 FROM humanresources;
-
-Total Terminated by Performance_Rating
+```
+Total Terminated by Performance Rating
+```sql
 SELECT
 Performance_Rating,
-SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',0,1))
+	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',0,1))
 FROM humanresources
 GROUP BY Performance_Rating;
-
+```
 Total Employee for each education level
+```sql
 SELECT
-Education_level,
-performance_rating,
-COUNT(employee_ID) OVER(PARTITION BY Education_Level) TotalEmployeeByEducation_Level
+	Education_level,
+	performance_rating,
+	COUNT(employee_ID) OVER(PARTITION BY Education_Level) TotalEmployeeByEducation_Level
 FROM humanresources
 ORDER BY TotalEmployeeByEducation_Level DESC;
-
+```
 The employees that have salary higher than the average sales across all orders
+```sql
 SELECT
 *
 FROM (
 SELECT
-	hiredate,
+    hiredate,
     termdate,
     CONCAT(first_name, ' ' ,last_name) FullName,
     Education_Level,
     Job_Title,
     Performance_Rating,
     salary,
-	ROUND(AVG(salary) OVER(), 2) AvgSalary
+    ROUND(AVG(salary) OVER(), 2) AvgSalary
 FROM humanresources
 )t 
 WHERE salary > AvgSalary 
 ORDER BY salary DESC;
-
+```
 Ranking salaries for each education level
+```sql
 SELECT
 * FROM (
 SELECT
-	hiredate,
+    hiredate,
     CONCAT(first_name, ' ' ,last_name) FullName,
     Education_Level,
     Job_Title,
-	salary,
-DENSE_RANK() OVER (PARTITION BY education_level ORDER BY salary DESC) AS Ranking
+    salary,
+    DENSE_RANK() OVER (PARTITION BY education_level ORDER BY salary DESC) AS Ranking
 FROM humanresources
 ORDER BY salary DESC
 )t
 WHERE Ranking <= 3;
-
+```
 ### Findings
 1. Performance ratings increase according to educational level, with PhD holders having the most excellent ratings, while high school graduates have more ratings indicating a need for improvement
 2. Performance rating does not affect the number of terminated employees
