@@ -19,8 +19,8 @@ Sales Data: The primary dataset used for this analysis is the "HumanResources.cs
 
 ### Tools
 
-Mysql
-Tableau
+- Mysql
+- Tableau
 
 ### Exploratory Data Analysis
 
