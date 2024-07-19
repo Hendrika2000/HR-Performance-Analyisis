@@ -15,7 +15,7 @@ This HR Performance analysis project aims to explore historical HR data to ident
 
 ### Data Sources
 
-Sales Data: The primary dataset used for this analysis is the "HumanResources.csv" file, containing information about each sale made by the company.
+Sales Data: The primary dataset used for this analysis is the "HumanResources.csv" file.
 
 ### Tools
 
