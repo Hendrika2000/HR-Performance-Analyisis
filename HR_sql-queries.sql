@@ -187,3 +187,66 @@ FROM (
     FROM humanresources
 ) AS grouped
 GROUP BY age_groups;
+
+6. Hiring Trends
+-- Number of Hiring per Year
+SELECT 
+    YEAR(hiredate) AS hire_year, 
+    COUNT(*) AS number_of_hires
+FROM humanresources
+GROUP BY hire_year;
+
+-- Number of Hires per Month
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    MONTH(hiredate) AS hire_month,
+    COUNT(*) AS number_of_hires
+FROM humanresources
+GROUP BY hire_year, hire_month
+ORDER BY hire_year, hire_month;
+
+-- Hiring Trends by Department
+-- Number of Hires per Department per Year
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    department,
+    COUNT(*) AS number_of_hires
+FROM humanresources
+GROUP BY hire_year, department
+ORDER BY hire_year, department;
+
+-- Hiring Trends by Job Title
+-- Number of Hires per Job Title per Year
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    job_title,
+    COUNT(*) AS number_of_hires
+FROM humanresources
+GROUP BY hire_year, job_title
+ORDER BY hire_year, job_title;
+
+-- Average Tenure before Hiring
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    AVG(DATEDIFF(CURDATE(), hiredate) / 365) AS average_tenure_years
+FROM humanresources
+GROUP BY hire_year;
+
+-- Hiring Trends by Gender
+-- Number of Hires by Gender per Year
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    gender,
+    COUNT(*) AS number_of_hires
+FROM humanresources
+GROUP BY hire_year, gender
+ORDER BY hire_year, gender;
+
+-- Retention Rate of New Hires
+SELECT 
+    YEAR(hiredate) AS hire_year,
+    COUNT(CASE WHEN termdate IS NULL OR DATEDIFF(CURDATE(), hiredate) < 365 THEN 1 END) AS retained_employees,
+    COUNT(*) AS total_hired,
+    (COUNT(CASE WHEN termdate IS NULL OR DATEDIFF(CURDATE(), hiredate) < 365 THEN 1 END) / COUNT(*)) * 100 AS retention_rate
+FROM humanresources
+GROUP BY hire_year;
