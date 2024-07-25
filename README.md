@@ -7,31 +7,33 @@
 - [Recommendations](Recommendations)
 
 ### Project Overview
-
-This HR Performance analysis project aims to explore historical HR data to identify key factors influencing employee retention and productivity, develop actionable insights to enhance employee satisfaction and optimize recruitment strategies, and create visualizations to effectively communicate findings and support data-driven HR decision-making.
-
+This project focuses on analyzing HR performance data to uncover insights into employee retention, productivity, and overall workforce effectiveness. By leveraging MySQL for data management and Tableau for visualization, this project aims to provide a detailed overview of HR metrics and trends.
 
 ![Screenshot (155)](https://github.com/user-attachments/assets/86556aea-d1ea-476f-b553-5667c85df8e4)
 
+### Key Objectives
+- Retention Analysis: Evaluate employee retention rates and identify key factors affecting turnover.
+- Performance Insights: Analyze employee performance data to assess productivity and engagement levels across different departments.
+- Demographic Trends: Investigate how demographics (e.g., age, gender, tenure) influence HR metrics.
+- Data Visualization: Create interactive dashboards and visualizations to present findings and trends in an easily understandable format.
+
+### Tools & Technologies
+- Data Management: MySQL
+- Data Visualization: Tableau
+
 ### Data Sources
-
-Sales Data: The primary dataset used for this analysis is the "HumanResources.csv" file.
-
-### Tools
-
-- Mysql
-- Tableau
+HR performance data including employee records, performance reviews, and turnover statistics.
+The primary dataset used for this analysis is the "HumanResources.csv" file.
 
 ### Exploratory Data Analysis
 
 KPIs that are most relevant to achieve your HR analysis goals:
-Some common KPIs include:
 1. Employee Retention Rate: Percentage of employees who remain employed over a certain period.
 2. Turnover Rate: Percentage of employees who leave the company within a specific period.
 3. Employee Satisfaction: Survey or review results to assess employee satisfaction with their job and work environment.
 
 ### Outcome:
-Interactive dashboards and reports showcasing key insights and recommendations for HR strategy optimization.
+Dynamic Tableau dashboards providing clear visualizations of HR metrics and trends, supported by a well-structured MySQL database for efficient data querying and management.
 You can interact with the HR dashboard [here](https://public.tableau.com/app/profile/rika3647/viz/HRDashboard_17212060570840/HRSummary)
 
 
