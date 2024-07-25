@@ -1,59 +1,72 @@
--- Total active and terminated employees
-SELECT
-	COUNT(Hiredate) TotalHired,
-	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalActive_Employee,
-	COUNT(Hiredate) - SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalTerminated
-FROM humanresources;
+1. Employee Demographics:
 
--- Percentage of employees who have terminated from the total number of employees.
+-- Age Distribution:
 SELECT 
-    (COUNT(CASE WHEN termdate IS NOT NULL THEN 1 END) / COUNT(*)) * 100 AS turnover_rate
-FROM humanresources;
-
--- Analyze the distribution of employees' performance ratings
-SELECT 
-    performance_rating, 
+    TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) AS age, 
     COUNT(*) AS number_of_employees
 FROM humanresources
-GROUP BY performance_rating;
+GROUP BY age;
 
--- Total Terminated by Performance Rating
+-- Employee Distribution by Age Groups
 SELECT
-Performance_Rating,
-	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',0,1))
+    CASE 
+        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) < 25 THEN '<25'
+        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 25 AND 34 THEN '25-34'
+        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 35 AND 44 THEN '35-44'
+        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 45 AND 54 THEN '45-54'
+        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) >= 55 THEN '55+'
+        ELSE ''
+    END AS age_groups,
+    COUNT(*) AS number_of_employees
 FROM humanresources
-GROUP BY Performance_Rating;
+GROUP BY age_groups;
 
--- Look at the gender distribution within the company.
+-- Gender Distribution
 SELECT 
     gender, 
     COUNT(*) AS number_of_employees
 FROM humanresources
 GROUP BY gender;
 
--- Analyze the number of resignations by gender
+-- Education Level Distribution
 SELECT 
-    gender, 
-    COUNT(*) AS number_of_resignations
+    education_level, 
+    COUNT(*) AS number_of_employees
 FROM humanresources
-WHERE termdate IS NOT NULL
-GROUP BY gender;
+GROUP BY education_level;
 
--- Total Employee for each education level
-SELECT
-	Education_level,
-	performance_rating,
-	COUNT(employee_ID) OVER(PARTITION BY Education_Level) TotalEmployeeByEducation_Level
-FROM humanresources
-ORDER BY TotalEmployeeByEducation_Level DESC;
 
--- Analyze the distribution of job positions within the company and the total of terminated by job positions
+2. Job and Department Analysis:
+
+-- Job Title Distribution
 SELECT 
     job_title, 
-    COUNT(*) AS number_of_employees,
-    (COUNT(CASE WHEN termdate IS NOT NULL THEN 1 END))
+    COUNT(*) AS number_of_employees
 FROM humanresources
 GROUP BY job_title;
+
+-- Department Distribution
+SELECT 
+    department, 
+    COUNT(*) AS number_of_employees
+FROM humanresources
+GROUP BY department;
+
+3. Salary Analysis
+
+-- Salary Distribution:
+SELECT 
+    salary, 
+    COUNT(*) AS number_of_employees
+FROM humanresources
+GROUP BY salary;
+
+-- Average Salary by Department:
+SELECT 
+    department, 
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department;
 
 -- The employees that have salary higher than the average sales across all orders
 SELECT
@@ -88,21 +101,58 @@ ORDER BY salary DESC
 )t
 WHERE Ranking <= 3;
 
--- Employee Distribution by Age Groups
-SELECT
-    CASE 
-        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) < 25 THEN '<25'
-        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 25 AND 34 THEN '25-34'
-        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 35 AND 44 THEN '35-44'
-        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) BETWEEN 45 AND 54 THEN '45-54'
-        WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) >= 55 THEN '55+'
-        ELSE ''
-    END AS age_groups,
+4. Performance Analysis
+-- Analyze the distribution of employees' performance ratings
+SELECT 
+    performance_rating, 
     COUNT(*) AS number_of_employees
 FROM humanresources
-GROUP BY age_groups;
+GROUP BY performance_rating;
 
--- Analyzes the number of resignations by age groups
+-- Average Performance Rating by Department:
+SELECT 
+    department, 
+    AVG(performance_rating) AS average_performance_rating
+FROM humanresources
+GROUP BY department;
+
+5. Turnover Analysis
+-- Total active and terminated employees
+SELECT
+	COUNT(Hiredate) TotalHired,
+	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalActive_Employee,
+	COUNT(Hiredate) - SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',1,0)) TotalTerminated
+FROM humanresources;
+
+-- Percentage of employees who have terminated from the total number of employees.
+SELECT 
+    (COUNT(CASE WHEN termdate IS NOT NULL THEN 1 END) / COUNT(*)) * 100 AS turnover_rate
+FROM humanresources;
+
+-- Total Terminated by Performance Rating
+SELECT
+Performance_Rating,
+	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',0,1))
+FROM humanresources
+GROUP BY Performance_Rating;
+
+-- Analyze the number of terminated employee by gender
+SELECT 
+    gender, 
+    COUNT(*) AS number_of_resignations
+FROM humanresources
+WHERE termdate IS NOT NULL
+GROUP BY gender;
+
+-- Analyze the distribution of job positions within the company and the total of terminated by job positions
+SELECT 
+    job_title, 
+    COUNT(*) AS number_of_employees,
+    (COUNT(CASE WHEN termdate IS NOT NULL THEN 1 END))
+FROM humanresources
+GROUP BY job_title;
+
+-- Analyzes the number of terminated employee by age groups
 SELECT
     CASE 
         WHEN TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) < 25 THEN '<25'
@@ -118,7 +168,7 @@ WHERE termdate IS NOT NULL
 GROUP BY age_groups;
 
 
--- Total number of employees and the number of terminated by age groups
+-- Total number of employees and the number of terminated employee by age groups
 SELECT
     age_groups,
     COUNT(*) AS total_employees,
