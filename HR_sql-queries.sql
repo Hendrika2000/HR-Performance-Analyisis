@@ -6,7 +6,6 @@ SELECT
 FROM humanresources;
 
 -- Total Terminated by Performance Rating
-
 SELECT
 Performance_Rating,
 	SUM(IF(Termdate IS NULL OR TRIM(termdate) = '',0,1))
