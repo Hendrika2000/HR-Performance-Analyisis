@@ -30,6 +30,8 @@ Some common KPIs include:
 2. Turnover Rate: Percentage of employees who leave the company within a specific period.
 3. Employee Satisfaction: Survey or review results to assess employee satisfaction with their job and work environment.
    
+You interact with the sales dashboard [here](https://public.tableau.com/app/profile/rika3647/viz/HRDashboard_17212060570840/HRSummary)
+
 
 ### Data Analysis
 
