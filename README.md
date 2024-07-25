@@ -9,8 +9,6 @@
 ### Project Overview
 This project focuses on analyzing HR performance data to uncover insights into employee retention, productivity, and overall workforce effectiveness. By leveraging MySQL for data management and Tableau for visualization, this project aims to provide a detailed overview of HR metrics and trends.
 
-![Screenshot (155)](https://github.com/user-attachments/assets/86556aea-d1ea-476f-b553-5667c85df8e4)
-
 ### Key Objectives
 - Retention Analysis: Evaluate employee retention rates and identify key factors affecting turnover.
 - Performance Insights: Analyze employee performance data to assess productivity and engagement levels across different departments.
